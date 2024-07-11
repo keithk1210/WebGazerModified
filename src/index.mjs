@@ -623,7 +623,7 @@ function setUserMediaVariable(){
  * @param {Function} onFail - Callback to call in case it is impossible to find user camera
  * @returns {*}
  */
-webgazer.begin = function(onFail) {
+webgazer.begin = function(onFail,stream) {
   if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost' && window.chrome){
     alert("WebGazer works only over https. If you are doing local development, you need to run a local server.");
   }
@@ -648,9 +648,9 @@ webgazer.begin = function(onFail) {
   // Request webcam access under specific constraints
   // WAIT for access
   return new Promise(async (resolve, reject) => {
-    let stream;
     try {
-      stream = await navigator.mediaDevices.getUserMedia( webgazer.params.camConstraints );
+      //stream = await navigator.mediaDevices.getUserMedia( webgazer.params.camConstraints );
+      console.log("Attempting to begin webgazer with CameraStream: " + stream)
       await init(stream);
       resolve(webgazer);
     } catch(err) {
